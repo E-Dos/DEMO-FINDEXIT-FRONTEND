@@ -1,0 +1,15 @@
+@forward '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/dark';
+@use '@nebular/auth/styles/globals' as *;
+$nb-enable-css-custom-properties: true; // <-- enable css custom properties
+
+
+// @include nb-install() {
+//   @include nb-theme-global();
+//   @include nb-auth-global(); // append the install mixin inside of the nb-install
+// } ;
+$nb-themes: nb-register-theme((
+  menu-item-active-text-color: white,
+  menu-item-icon-color: white
+), dark, dark);

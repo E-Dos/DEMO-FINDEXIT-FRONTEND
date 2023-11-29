@@ -1,0 +1,22 @@
+<nb-layout *ngIf="!authentificated">
+  <nb-layout-column><router-outlet ></router-outlet></nb-layout-column>
+
+</nb-layout>
+<nb-layout *ngIf="authentificated">
+  <nb-layout-header fixed>
+    <app-header></app-header>
+
+  </nb-layout-header>
+
+  <nb-layout-footer>
+    <app-footer></app-footer>
+  </nb-layout-footer>
+
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+
+  <nb-sidebar tag="left">
+    <app-sidebar></app-sidebar>
+  </nb-sidebar>
+</nb-layout>

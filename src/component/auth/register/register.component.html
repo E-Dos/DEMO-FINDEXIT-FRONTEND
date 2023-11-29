@@ -1,0 +1,45 @@
+<nb-auth-block class="m-auto mt-5">
+  <div class="container card p-4">
+    <div class="row">
+      <h2 style="color:black;">Регистрация</h2>
+      <form (ngSubmit)="register()" #form="ngForm" class="row">
+        <div class="mb-3">
+          <label class="form-label" for="username">Username:</label>
+          <input class="form-control" type="text" id="username" name="username" required [(ngModel)]="user.username">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="email">Email:</label>
+          <input class="form-control" type="email" id="email" name="email" required [(ngModel)]="user.email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password">Пароль:</label>
+          <input class="form-control" placeholder="Пароль" type="password" id="password" name="password" required
+            [(ngModel)]="user.password">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="confirmPassword">Confirm Password:</label>
+          <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" required
+            [(ngModel)]="user.confirmPassword">
+          <!-- Отображение сообщения об ошибке -->
+          <div *ngIf="form.invalid && user.password !== user.confirmPassword">
+            Passwords do not match.
+          </div>
+        </div>
+        <div style="color: coral;" *ngIf="form.invalid">
+          Please fill in all required fields.
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <div class="col">
+            <button class="btn btn-primary btn-sm" routerLink="/login">Вернуться</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-success btn-sm" type="submit"
+              [disabled]="form.invalid || user.password !== user.confirmPassword">Регистрация</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</nb-auth-block>
