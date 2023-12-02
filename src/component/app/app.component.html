@@ -1,0 +1,19 @@
+<ng-container *ngIf="!authenticated; else defaultLayout">
+  <nb-layout>
+    <nb-layout-column><router-outlet ></router-outlet></nb-layout-column>
+  </nb-layout>
+
+</ng-container>
+<ng-template #defaultLayout>
+  <nb-layout>
+    <nb-layout-header >
+      <app-header></app-header>
+    </nb-layout-header>
+    <nb-layout-column >
+      <router-outlet></router-outlet>
+    </nb-layout-column>
+    <nb-layout-footer>
+      <app-footer></app-footer>
+    </nb-layout-footer>
+  </nb-layout>
+</ng-template>

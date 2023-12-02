@@ -1,0 +1,60 @@
+<nb-card  [nbSpinner]="loading" [nbSpinnerMessage]='loadingMessage' [nbSpinnerStatus]="spinnerStatus" >
+  <nb-card-header>
+    <div class="row">
+    {{title}}
+     <div class="col-md-1">
+      <button nbButton status="info" outline (click)="addTask()" size="tiny" class="ml-10">Добавить</button>
+    </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered table-sm table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Наименование</th>
+              <th scope="col">Дата старта</th>
+              <th scope="col">Дата заверщения</th>
+              <th scope="col">% выполнения</th>
+              <th scope="col">Действие</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="taskList.length > 0; else noData">
+              <tr *ngFor="let item of taskList; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.Name}}</td>
+                <td>{{item.StartDate | digitDate}}</td>
+                <td>{{item.EndDate | digitDate}}</td>
+                <td>{{item.CompletionPercent}} %</td>
+                <td>
+                  <button nbButton status="info" (click)="editTask(item);" size="tiny"
+                    class="ml-10"><nb-icon icon="edit" pack="eva"></nb-icon>
+                  </button>
+                  <button nbButton status="danger" (click)="deleteItem(item);" size="tiny" class="m-1"><nb-icon
+                      icon="trash" pack="eva"></nb-icon>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+            <ng-template #noData>
+              <tr>
+                <td colspan="6">Нет доступных записей.</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-md-12">
+        <button nbButton status="danger" (click)="dismiss()" size="tiny" class="ms-3">Закрыть</button>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

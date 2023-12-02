@@ -1,0 +1,50 @@
+<nb-card [nbSpinner]="loading" [nbSpinnerMessage]='loadingMessage' [nbSpinnerStatus]="spinnerStatus">
+  <nb-card-header>{{title}}</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col">
+        <div class="col mt-2">
+          <label>Название</label>
+          <div class="col-sm col-md">
+            <input type="text" nbInput status="info" required fieldSize="small" [(ngModel)]="model.Name">
+          </div>
+        </div>
+        <div class="col mt-3">
+          <label>Описание</label>
+          <div class="col-sm col-md">
+            <input type="text" nbInput status="info" required fieldSize="small" [(ngModel)]="model.Description">
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col mt-2">
+          <label>Дата старта</label>
+          <div class="col-sm col-md">
+            <input class="ml-5" nbInput fieldSize="small" status="info" placeholder="Выберите дату"
+              [(ngModel)]="model.StartDate" [nbDatepicker]="startDateTimePicker">
+            <nb-datepicker format="dd.MM.yyyy" #startDateTimePicker></nb-datepicker>
+          </div>
+
+        </div>
+        <div class="col mt-3">
+          <label>Дата завершения</label>
+          <div class="col-sm col-md">
+            <input class="ml-5" nbInput fieldSize="small" status="info" placeholder="Выберите дату"
+            [(ngModel)]="model.EndDate" [nbDatepicker]="endDateTimePicker">
+          <nb-datepicker format="dd.MM.yyyy" #endDateTimePicker></nb-datepicker>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-md-12">
+        <button *ngIf="isCreate" nbButton status="primary" (click)="create()" size="tiny">Создать</button>
+        <button *ngIf="isEdit" nbButton status="primary" (click)="update()" size="tiny">Изменить</button>
+        <button nbButton status="danger" (click)="dismiss()" size="tiny" class="ms-3">Закрыть</button>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

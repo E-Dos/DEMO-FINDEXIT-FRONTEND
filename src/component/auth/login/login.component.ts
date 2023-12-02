@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbAuthService, NbLoginComponent } from '@nebular/auth';
+import { NbLoginComponent } from '@nebular/auth';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +7,13 @@ import { NbAuthService, NbLoginComponent } from '@nebular/auth';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends NbLoginComponent {
- // Добавьте свои свойства, например, поля для ввода
+  loading = false
+  loadingMessage: string = `Авторизация...`;
+  spinnerStatus: string = 'primary';
 override user: { username: string; password: string } = { username: '', password: '' };
 
  override login() {
+  this.loading = true
    super.login();
  }
-
 }

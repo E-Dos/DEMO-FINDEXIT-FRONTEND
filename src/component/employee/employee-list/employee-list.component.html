@@ -1,0 +1,100 @@
+<nb-card [nbSpinner]="loading" [nbSpinnerMessage]='loadingMessage' [nbSpinnerStatus]="spinnerStatus">
+  <nb-card-header>
+    <div class="row">
+      Управления сотрудниками
+      <div class="col-md-2">
+        <button nbButton status="info" outline fullWidth (click)="addEmp()" size="tiny" class="ml-10">Добавить сотрудника</button>
+      </div>
+      <div class="col-md-1">
+        <button nbButton status="info" outline fullWidth (click)="openReportForm(myFormTemplate)" size="tiny" class="ml-10">Отчет</button>
+      </div>
+      <div class="col-md-3 m-auto">
+        <input nbInput placeholder="Поиск по ФИО" fullWidth status="info" fieldSize="tiny" [(ngModel)]="searchText">
+      </div>
+    </div>
+    <ng-template #reportForm let-dataRef="dialogRef">
+      <nb-card>
+        <nb-card-header>Отчет: Просроченные задачи</nb-card-header>
+        <nb-card-body>
+          <div class="col-md-12 p-2">
+            <button nbButton size="tiny" status="warning" (click)="printReport()">
+              <nb-icon icon="printer" class="icons-style"></nb-icon> Распечатать
+            </button>
+          </div>
+          <table class="table table-bordered table-sm table-hover" #overdueTable>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Сотрудник</th>
+                <th scope="col">Наименование</th>
+                <th scope="col">Дата старта</th>
+                <th scope="col">Дата завершения</th>
+                <th scope="col">% выполнения</th>
+                <th scope="col">Просрочено дней</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of overdueTaskList; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.User.FIO}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.StartDate | digitDate}}</td>
+                <td>{{item.EndDate | digitDate}}</td>
+                <td>{{item.CompletionPercent}} %</td>
+                <td>{{item.DayOfOverdue }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </nb-card-body>
+        <nb-card-footer>
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <button nbButton size="tiny" status="danger" (click)="closeReportForm(dataRef)">закрыть</button>
+            </div>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </ng-template>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered table-sm table-hover" #table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Логин</th>
+              <th scope="col">ФИО</th>
+              <th scope="col">Должность</th>
+              <th scope="col">Задач</th>
+              <th scope="col">Выполнено</th>
+              <th scope="col">Действие</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of filteredEmpList; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{item.Username}}</td>
+              <td>{{item.FIO}}</td>
+              <td>{{item.Position}}</td>
+              <td>{{item.Tasks.length}}</td>
+              <td> {{ calcAvgCompletionPercent(item.Tasks) }} %</td>
+              <td>
+                <button nbButton status="info" (click)="editEmp(item); $event.stopPropagation();" size="tiny"
+                  class="ml-10"><nb-icon icon="edit" pack="eva"></nb-icon>
+                </button>
+                <button nbButton status="danger" (click)="deleteEmp(item);" size="tiny" class="m-1"><nb-icon
+                    icon="trash" pack="eva"></nb-icon>
+                </button>
+                <button nbButton status="warning" (click)="showTask(item);" title="Просмотр задачи" size="tiny"
+                  class="ml-5"><nb-icon icon="eye" pack="eva"></nb-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,12 +1,12 @@
 <div class="header-nav">
-  <a (click)="toggleSidebar()">
-    <nb-icon icon="menu-2-outline" style="font-size: 1.75rem;"></nb-icon>
-  </a>
   <div>
-    <nb-user name="Nikita Poltoratsky"
-             title="full-stack developer"
-             [nbContextMenu]="profileItems"
-             nbContextMenuTag="my-context-menu">
-    </nb-user>
+   <button nbButton status="info" size="small" routerLink="employee" ><nb-icon icon="people"></nb-icon>
+    Сотрудники
+   </button>
+  </div>
+  <div>
+    <button nbButton status="info" size="small" (click)="logout()" ><nb-icon icon="log-out"></nb-icon>
+      Выйти
+     </button>
   </div>
 </div>

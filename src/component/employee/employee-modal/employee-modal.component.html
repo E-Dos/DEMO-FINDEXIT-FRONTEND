@@ -1,0 +1,51 @@
+<nb-card [nbSpinner]="loading" [nbSpinnerMessage]='loadingMessage' [nbSpinnerStatus]="spinnerStatus">
+  <nb-card-header>{{title}}</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col">
+        <strong>
+          Учетная запись
+        </strong>
+        <div class="col mt-2">
+          <label>Логин</label>
+          <div class="col-sm col-md">
+            <input type="text" nbInput status="info" required fullWidth fieldSize="small" [(ngModel)]="model.Username">
+          </div>
+        </div>
+        <div class="col mt-3">
+          <label>Пароль</label>
+          <div class="col-sm col-md">
+            <input type="password" nbInput status="info" required minlength="4" fullWidth fieldSize="small"
+              (ngModel)="model.Password">
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <strong>
+          Данные о сотрудника
+        </strong>
+        <div class="col mt-2">
+          <label>ФИО</label>
+          <div class="col-sm col-md">
+            <input type="text" nbInput status="info" required fullWidth fieldSize="small" [(ngModel)]="model.FIO">
+          </div>
+        </div>
+        <div class="col mt-3">
+          <label>Должность</label>
+          <div class="col-sm col-md">
+            <input type="text" nbInput status="info" required fullWidth fieldSize="small" [(ngModel)]="model.Position">
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-md-12">
+        <button *ngIf="isCreate" nbButton status="primary" (click)="create()" size="tiny">Создать</button>
+        <button *ngIf="isEdit" nbButton status="primary" (click)="update()" size="tiny">Изменить</button>
+        <button nbButton status="danger" (click)="dismiss()" size="tiny" class="ms-3">Закрыть</button>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

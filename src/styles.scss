@@ -1,10 +1,19 @@
-// this is our just created themes.scss file, make sure the path to the file is correct
 @use 'themes' as *;
 @use 'bootstrap/scss/bootstrap';
-// framework component styles
 @use '@nebular/theme/styles/globals' as *;
 
-// install the framework styles
+
 @include nb-install() {
-  @include nb-theme-global();
+  @include nb-theme-global();// append the install mixin inside of the nb-install
+} ;
+nb-card{
+  min-width: 490px;
+  min-height: 300px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 15px;
+  margin-left: 15px;
+  align-items: center;
 }
